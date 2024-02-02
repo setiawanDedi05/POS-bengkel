@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'All Users')
+@section('title', 'Products')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Users</h1>
+                <h1>Products</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('user.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Users</a></div>
-                    <div class="breadcrumb-item">All Users</div>
+                    <div class="breadcrumb-item"><a href="#">Products</a></div>
+                    <div class="breadcrumb-item">All Products</div>
                 </div>
             </div>
             <div class="section-body">
@@ -32,7 +32,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('user.index') }}">
+                                    <form method="GET" action="{{ route('product.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="name">
                                             <div class="input-group-append">
@@ -48,37 +48,33 @@
                                     <table class="table-striped table">
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Nomor Telp</th>
-                                            <th>Role</th>
+                                            <th>Price</th>
+                                            <th>Stock</th>
                                             <th>Dibuat Tanggal</th>
                                             <th></th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($products as $product)
                                             <tr>
                                                 <td>
-                                                    {{ $user->name }}
+                                                    {{ $product->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->email }}
+                                                    @currency($product->price)
                                                 </td>
                                                 <td>
-                                                    {{ $user->phone_number }}
+                                                    {{ $product->stock }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->role }}
-                                                </td>
-                                                <td>
-                                                    {{ $user->created_at }}
+                                                    {{ $product->created_at }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('user.edit', $user->id) }}"
+                                                        <a href="{{ route('product.edit', $product->id) }}"
                                                             class="btn btn-sm btn-info btn-icon mr-2">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
-                                                        <form action="{{ route('user.destroy', $user->id) }}"
+                                                        <form action="{{ route('product.destroy', $product->id) }}"
                                                             method="POST">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -96,7 +92,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $products->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>
@@ -116,8 +112,8 @@
             var form = $(this).closest("form");
             event.preventDefault();
             swal({
-                    title: `Kamu yakin mau hapus user ini?`,
-                    text: 'Nanti user itu akan hilang loh!',
+                    title: `Kamu yakin mau hapus produk ini?`,
+                    text: 'Nanti produk itu akan hilang loh!',
                     icon: 'warning',
                     buttons: true,
                     dangerMode: true,

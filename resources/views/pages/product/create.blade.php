@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit User')
+@section('title', 'Create Product')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -16,24 +16,23 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Edit User</h1>
+                <h1>Create Product Form</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">User</a></div>
-                    <div class="breadcrumb-item">Edit</div>
+                    <div class="breadcrumb-item"><a href="#">Products</a></div>
+                    <div class="breadcrumb-item">Create</div>
                 </div>
             </div>
             <div class="section-body">
-                <form action="{{ route('user.update', $user) }}" method="POST">
+                <form action="{{ route('product.store') }}" method="POST">
                     @csrf
-                    @method('PUT')
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" name="name" value="{{ $user->name }}"
+                                        <input type="text" name="name"
                                             class="form-control @error('name')
                                             is-invalid
                                         @enderror">
@@ -43,38 +42,32 @@
                                             </div>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="fas fa-envelope"></i>
-                                                </div>
-                                            </div>
-                                            <input type="email" name="email" value="{{ $user->email }}"
-                                                class="form-control email @error('email')
+                                    <div class="form-group mb-0">
+                                        <label>Description</label>
+                                        <textarea
+                                            class="form-control @error('description')
                                             is-invalid
-                                        @enderror">
-                                            @error('email')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                        @enderror"
+                                            data-height="150"></textarea>
+                                        @error('description')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label>Phone Number</label>
+                                        <label>Price</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
-                                                    <i class="fas fa-phone"></i>
+                                                    <i class="fas fa-money-bill"></i>
                                                 </div>
                                             </div>
-                                            <input type="text" name="phone_number" value="{{ $user->phone_number }}"
-                                                class="form-control phone-number @error('phone_number')
+                                            <input type="text" name="price"
+                                                class="form-control phone-number @error('price')
                                                 is-invalid
                                             @enderror">
-                                            @error('phone_number')
+                                            @error('price')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -82,30 +75,36 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">Role</label>
-                                        <div class="selectgroup w-100">
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="role" value="ADMIN"
-                                                    class="selectgroup-input" @if ($user->role == 'ADMIN')
-                                                        checked
-                                                    @endif>
-                                                <span class="selectgroup-button">Admin</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="role" value="STAFF"
-                                                    class="selectgroup-input" @if ($user->role == 'STAFF')
-                                                    checked
-                                                @endif>
-                                                <span class="selectgroup-button">Staff</span>
-                                            </label>
-                                            <label class="selectgroup-item">
-                                                <input type="radio" name="role" value="USER"
-                                                    class="selectgroup-input" @if ($user->role == 'USER')
-                                                    checked
-                                                @endif>
-                                                <span class="selectgroup-button">User</span>
-                                            </label>
+                                        <label>Stock</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fas fa-cubes"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" name="stock"
+                                                class="form-control number @error('stock')
+                                                is-invalid
+                                            @enderror">
+                                            @error('stock')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label>Image URL</label>
+                                        <textarea
+                                            class="form-control @error('image')
+                                            is-invalid
+                                        @enderror"
+                                            data-height="150"></textarea>
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="card-footer text-right">
                                         <button class="btn btn-primary">Submit</button>
@@ -130,7 +129,6 @@
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
     <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-    <script src="{{ asset('library/jquery.pwstrength/jquery.pwstrength.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>

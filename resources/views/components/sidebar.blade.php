@@ -13,7 +13,7 @@
                 <ul class="dropdown-menu">
                     <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">General Dashboard</a>
+                            href="{{ route('home') }}">General Dashboard</a>
                     </li>
                 </ul>
             </li>
@@ -23,6 +23,15 @@
                 <ul class="dropdown-menu">
                     <li class='{{ Request::is('user.index') ? 'active' : '' }}'>
                         <a class="nav-link" href="{{ route('user.index') }}">All Users</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="fas fa-cube"></i><span>Product</span></a>
+                <ul class="dropdown-menu">
+                    <li class='{{ Request::is('product.index') ? 'active' : '' }}'>
+                        <a class="nav-link" href="{{ route('product.index') }}">All Product</a>
                     </li>
                 </ul>
             </li>

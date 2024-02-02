@@ -18,7 +18,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Dedi',
             'email' => 'dedi@example.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'phone_number' => '081575271662',
+            'role' => 'ADMIN'
+        ]);
+
+        $this->call([
+            ProductSeeder::class,
         ]);
     }
 }
