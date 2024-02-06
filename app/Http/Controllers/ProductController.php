@@ -23,8 +23,18 @@ class ProductController extends Controller
     }
 
     public function store(StoreProductRequest $request) {
+        $filename = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/products', $filename);
         $data = $request->all();
-        \App\Models\Product::create($data);
+
+        $product = new \App\Models\Product;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = (int) $request->price;
+        $product->stock = (int) $request->stock;
+        $product->image = $filename;
+        $product->save();
+
         return redirect()->route('product.index')->with('success', 'Produk berhasil dibuat');
     }
 

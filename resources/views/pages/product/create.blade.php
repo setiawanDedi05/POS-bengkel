@@ -3,12 +3,8 @@
 @section('title', 'Create Product')
 
 @push('style')
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-daterangepicker/daterangepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
-    <link rel="stylesheet" href="{{ asset('library/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 @endpush
 
@@ -24,7 +20,7 @@
                 </div>
             </div>
             <div class="section-body">
-                <form action="{{ route('product.store') }}" method="POST">
+                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-12 col-md-6 col-lg-6">
@@ -45,6 +41,7 @@
                                     <div class="form-group mb-0">
                                         <label>Description</label>
                                         <textarea
+                                            name="description"
                                             class="form-control @error('description')
                                             is-invalid
                                         @enderror"
@@ -93,13 +90,12 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group mb-0">
-                                        <label>Image URL</label>
-                                        <textarea
-                                            class="form-control @error('image')
-                                            is-invalid
-                                        @enderror"
-                                            data-height="150"></textarea>
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <div id="image-preview" class="image-preview w-100">
+                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <input type="file" name="image" id="image-upload" />
+                                        </div>
                                         @error('image')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -120,16 +116,9 @@
 @endsection
 
 @push('scripts')
-    <!-- JS Libraies -->
-    <script src="{{ asset('library/cleave.js/dist/cleave.min.js') }}"></script>
-    <script src="{{ asset('library/cleave.js/dist/addons/cleave-phone.us.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
-    <script src="{{ asset('library/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
     <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
-    <script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-
-    <!-- Page Specific JS File -->
-    <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+    <script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
+    <script src="{{ asset('js/page/features-post-create.js') }}"></script>
 @endpush
