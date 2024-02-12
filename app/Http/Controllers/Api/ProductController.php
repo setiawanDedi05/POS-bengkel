@@ -12,7 +12,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = \App\Models\Product::orderBy('id', 'desc')->paginate(10);
+        $products = \App\Models\Product::orderBy('id', 'desc')->get();
         return response()->json([
             'success' => true,
             'message' => 'List data product',
