@@ -26,7 +26,7 @@ class UpdateProductRequest extends FormRequest
             'description' => '',
             'price' => 'required',
             'stock' => 'required',
-            'image' => ''
+            'image' => 'required|image|mimes:png,jpg,jpeg'
         ];
     }
 }

@@ -22,9 +22,5 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '081575271662',
             'role' => 'ADMIN'
         ]);
-
-        $this->call([
-            ProductSeeder::class,
-        ]);
     }
 }

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description')->default("");
-            $table->integer('price');
-            $table->integer('stock');
-            $table->string('image')->default("https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg");
+            $table->timestamp('transaction_time');
+            $table->integer('total_price');
+            $table->integer('total_qty');
+            $table->foreignId('id_cashier')->constrained('users');
+            $table->enum('payment_method', ['cash', 'qris']);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('orders');
     }
 };
