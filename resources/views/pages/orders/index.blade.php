@@ -46,7 +46,8 @@
                                         <tr>
                                             <th>Tanggal</th>
                                             <th>Pembayaran</th>
-                                            <th>Service Fee</th>
+                                            <th>Nama Order</th>
+                                            <th>Biaya Service</th>
                                             <th>Total Harga</th>
                                             <th>Total items</th>
                                             <th>Cashier</th>
@@ -58,6 +59,9 @@
                                                 </td>
                                                 <td>
                                                     {{ $order->payment_method }}
+                                                </td>
+                                                <td>
+                                                    {{ $order->order_name }}
                                                 </td>
                                                 <td>
                                                     @currency($order->service_fee)
