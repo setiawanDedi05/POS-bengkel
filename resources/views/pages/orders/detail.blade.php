@@ -34,7 +34,9 @@
                                 <span style="display: block">Payment Method : {{ $order->payment_method }}</span>
                                 <span style="display: block">Tanggal Order : {{ $order->transaction_time }}</span>
                                 <span style="display: block">Jumlah Item : {{ $order->total_qty }}</span>
-                                <span style="display: block">Total : @currency($order->total_price)</span>
+                                <span style="display: block">Total Harga Item: @currency($order->total_price)</span>
+                                <span style="display: block">Biaya Service: @currency($order->service_fee)</span>
+                                <span style="display: block">Total: @currency($order->total_price + $order->service_fee)</span>
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
