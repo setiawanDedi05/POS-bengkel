@@ -15,7 +15,9 @@ class Order extends Model
         'total_price',
         'total_qty',
         'id_cashier',
-        'payment_method'
+        'payment_method',
+        'service_fee',
+        'order_name'
     ];
 
 

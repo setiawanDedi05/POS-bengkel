@@ -19,6 +19,8 @@ class OrderController extends Controller
             'id_cashier' => 'required|exists:users,id',
             'total_price' => 'required|numeric',
             'total_qty' => 'required|numeric',
+            'service_fee' => 'required|numeric',
+            'order_name' => 'required',
             'payment_method' => 'required|in:cash,qris',
             'order_items' => 'required|array',
             'order_items.*.id_product' => 'required|exists:products,id',
@@ -33,6 +35,8 @@ class OrderController extends Controller
             'total_price' => $request->total_price,
             'total_qty' => $request->total_qty,
             'total_item' => $request->total_item,
+            'service_fee' => $request->service_fee,
+            'order_name' => $request->order_name,
             'payment_method' => $request->payment_method,
         ]);
 
